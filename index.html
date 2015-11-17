@@ -3,6 +3,7 @@
   <head>
     <title>Store Locator</title>
     <meta charset="utf-8">
+    <meta name="author" content="Klevis Mino">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -19,7 +20,8 @@
         </p>
           <p><button id="calculate_distances" type="button" onclick="displayDistances();">Calculate distances</button></p>
       </div>
-      <div id="outputDiv"></div>
+      <div id="distance_panel"></div>
+      <div id="directions_panel"></div>
     </div>
     <div id="map-canvas" style="width:750px; height:550px;"></div>
   </body>

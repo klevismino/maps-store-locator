@@ -1,9 +1,12 @@
 var allStores;
+
 var map,
     markers,
     infoWindows,
     geocoder,
-    service;
+    distanceService,
+    directionsDisplay,
+    directionsService;
 
 $.getJSON("25stores.json", function(data) {
     allStores = data;
@@ -20,7 +23,11 @@ function initialize() {
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     geocoder = new google.maps.Geocoder();
-    service = new google.maps.DistanceMatrixService();
+    distanceService = new google.maps.DistanceMatrixService();
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('directions_panel'));
 
     updateAllMarkers();
 
@@ -29,8 +36,9 @@ function initialize() {
             if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
                 document.getElementById('user_location').value = results[0].formatted_address;
-                outputDiv.innerHTML = '';
+                distance_panel.innerHTML = '';
                 clearMarkers();
+                clearDirections();
                 display_hide_markers_button.innerHTML = 'Show stores';
                 document.getElementById("calculate_distances").style.display='none';
             }
@@ -45,7 +53,8 @@ function initialize() {
     var autocomplete = new google.maps.places.Autocomplete(input);
 
     autocomplete.addListener('place_changed', function() {
-        outputDiv.innerHTML = '';
+        distance_panel.innerHTML = '';
+        clearDirections();
         clearMarkers();
         display_hide_markers_button.innerHTML = 'Show stores';
         document.getElementById("calculate_distances").style.display='none';
@@ -66,6 +75,7 @@ function updateAllMarkers() {
     if(markers && markers.length > 0) {
         clearMarkers();
     }
+
     markers = [];
     infoWindows = [];
     if(allStores !== undefined) {
@@ -80,10 +90,15 @@ function updateAllMarkers() {
             marker.addListener('click', function() {
                 geocoder.geocode({latLng: marker.getPosition()}, function(results, status) {
                     if(status === google.maps.GeocoderStatus.OK) {
-                        infoWindows[markers.indexOf(marker)].setContent("<h3>" + marker.title + "</h3>" +
-                            "<p>" + results[0].formatted_address + "</p>");
+                        infoWindows[markers.indexOf(marker)].setContent('<h3>' + marker.title + '</h3>' +
+                            '<p>' + results[0].formatted_address + '</p>');
+                        if(document.getElementById('user_location').value !== '') {
+                            infoWindows[markers.indexOf(marker)].setContent(infoWindows[markers.indexOf(marker)].getContent() +
+                                '<p><button id="show_directions" type="button" ' +
+                                'onclick="showDirections(' + markers.indexOf(marker) + ');">Directions</button></p>');
+                        }
                     } else {
-                        infoWindows[markers.indexOf(marker)].setContent("<h3>" + marker.title + "</h3><br>revere geocode failed:" + status);
+                        infoWindows[markers.indexOf(marker)].setContent('<h3>' + marker.title + '</h3><br>revere geocode failed:' + status);
                     }
                 });
                 infoWindows[markers.indexOf(marker)].open(map, marker);
@@ -117,7 +132,8 @@ function showHideMarkers(buttonId) {
         document.getElementById(buttonId).innerHTML = 'Hide stores';
     } else {
         clearMarkers();
-        outputDiv.innerHTML = '';
+        clearDirections();
+        distance_panel.innerHTML = '';
         document.getElementById("calculate_distances").style.display='none';
         document.getElementById(buttonId).innerHTML = 'Show stores';
     }
@@ -150,8 +166,9 @@ function adjustValue(inputId) {
 
     if(display_hide_markers_button.innerHTML === 'Hide stores') {
         clearMarkers();
+        clearDirections();
         showMarkers(markers.slice(0, number.value));
-        outputDiv.innerHTML = '';
+        distance_panel.innerHTML = '';
     }
 }
 
@@ -160,17 +177,7 @@ function showHideDistance(inputId) {
         document.getElementById("calculate_distances").style.display='block';
     } else {
         document.getElementById("calculate_distances").style.display='none';
-        outputDiv.innerHTML = '';
-    }
-}
-
-function callback(response, status) {
-    if (status != google.maps.DistanceMatrixStatus.OK) {
-        alert('Error was: ' + status);
-    } else {
-        updateAllStores(response);
-        // recreate markers for the sorted stores
-        updateAllMarkers();
+        distance_panel.innerHTML = '';
     }
 }
 
@@ -203,7 +210,7 @@ function calculateDistances(callback) {
         allStores.forEach(function (store) {
             destinations.push(store.address);
         });
-        service.getDistanceMatrix(
+        distanceService.getDistanceMatrix(
             {
                 origins: [origin],
                 destinations: destinations,
@@ -216,13 +223,39 @@ function calculateDistances(callback) {
 }
 
 function displayDistances() {
-    // clear what is in outputDiv
-    outputDiv.innerHTML = '';
+    // clear what is in distance_panel
+    clearDirections();
+    distance_panel.innerHTML = '';
     var numberOfStores = document.getElementById('number_of_stores').value;
     for(var i = 0; i < numberOfStores; i++) {
-        outputDiv.innerHTML += allStores[i].distance.text + " from " + allStores[i].address + "<br />";
+        distance_panel.innerHTML += allStores[i].distance.text + " from " + allStores[i].address + "<br />";
     }
     // update markers
     clearMarkers();
     showMarkers(markers.slice(0, numberOfStores));
+}
+
+function showDirections(markerId) {
+    var request = {
+        origin : document.getElementById('user_location').value,
+        destination : allStores[markerId].address,
+        travelMode : google.maps.DirectionsTravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC
+    };
+
+    directionsService.route(request, function(response, status) {
+        if(status == google.maps.DirectionsStatus.OK) {
+            distance_panel.innerHTML = '';
+            directionsDisplay.setMap(map);
+            directionsDisplay.setDirections(response);
+        } else {
+            distance_panel.innerHTML = '';
+            directions_panel.innerHTML = 'Unreachable. Cannot get directions.';
+        }
+    });
+}
+
+function clearDirections() {
+    directionsDisplay.setMap(null);
+    directions_panel.innerHTML = '';
 }

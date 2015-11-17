@@ -15,8 +15,13 @@ html, body {
     padding-left: 2%;
 }
 
-#outputDiv {
-    font-size: 11px;
+#distance_panel {
+    font-size: 12px;
+}
+
+#directions_panel {
+    font-size: 15px;
+    width:58%;
 }
 
 #calculate_distances {
