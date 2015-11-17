@@ -1,0 +1,152 @@
+[
+  {
+    "name":"Frankie Johnnie & Luigo Too",
+    "address":"939 W El Camino Real, Mountain View, CA",
+    "lat":37.386339,
+    "lng":-122.085823
+  },
+  {
+    "name":"Lynn's Paradise Cafe",
+    "address":"984 Barret Ave, Louisville, KY",
+    "lat":38.23693,
+    "lng":-85.72854
+  },
+  {
+    "name":"Coco's By The Falls",
+    "address":"5339 Murray Street, Niagara Falls, Ontario",
+    "lat":43.083555,
+    "lng":-79.082706
+  },
+  {
+    "name":"Round Table Pizza: Mountain View",
+    "address":"570 N Shoreline Blvd, Mountain View, CA",
+    "lat":37.402653,
+    "lng":-122.079354
+  },
+  {
+    "name": "Fat Joe's Pizza Pasta & Bar",
+    "address": "4721 W Park Blvd # 101, Plano, TX",
+    "lat": 33.027055,
+    "lng": -96.788912
+  },
+  {
+    "name":"Beau Jo's Pizza",
+    "address":"2710 S Colorado Blvd, Denver, CO",
+    "lat":39.667342,
+    "lng":-104.940708
+  },
+  {
+    "name":"Round Table Pizza: Sunnyvale-Mary-Central Expy",
+    "address":"415 N Mary Ave, Sunnyvale, CA",
+    "lat":37.390038,
+    "lng":-122.042034
+  },
+  {
+    "name":"Giordano's",
+    "address":"730 N Rush St, Chicago, IL",
+    "lat":41.895729,
+    "lng":-87.625411
+  },
+  {
+    "name":"Filippi's Pizza Grotto",
+    "address":"1747 India St, San Diego, CA",
+    "lat":32.723831,
+    "lng":-117.168326
+  },
+  {
+    "name":"Pizzeria Paradiso",
+    "address":"2029 P St NW, Washington, DC",
+    "lat":38.90965,
+    "lng":-77.0459
+  },
+  {
+    "name":"Tutta Bella Neapolitan Pizzera",
+    "address":"4918 Rainier Ave S, Seattle, WA",
+    "lat":47.557704,
+    "lng":-122.284985
+  },
+  {
+    "name":"Grimaldi's",
+    "address":"19 Old Fulton St, Brooklyn, NY",
+    "lat":40.702515,
+    "lng":-73.993733
+  },
+  {
+    "name":"Hideaway Pizza",
+    "address":"6616 N Western Ave, Oklahoma City, OK",
+    "lat":35.539114,
+    "lng":-97.52976
+  },
+  {
+    "name":"Upper Crust",
+    "address":"20 Charles St, Boston, MA",
+    "lat":42.356607,
+    "lng":-71.069681
+  },
+  {
+    "name":"Brick Oven Restaurant",
+    "address":"111 E 800 N, Provo, UT",
+    "lat":40.244493,
+    "lng":-111.656322
+  },
+  {
+    "name":"Frank Pepe Pizzeria Napoletana",
+    "address":"157 Wooster St, New Haven, CT",
+    "lat":41.302803,
+    "lng":-72.917042
+  },
+  {
+    "name":"Zeeks Pizza - Belltown",
+    "address":"419 Denny Way, Seattle, WA",
+    "lat":47.618314,
+    "lng":-122.347998
+  },
+  {
+    "name":"Escape From New York Pizza",
+    "address":"622 NW 23rd Ave, Portland, OR",
+    "lat":45.527105,
+    "lng":-122.698509
+  },
+  {
+    "name":"Mellow Mushroom Pizza Bakers",
+    "address":"11 W Liberty St, Savannah, GA",
+    "lat":32.074673,
+    "lng":-81.093699
+  },
+  {
+    "name":"Old Chicago",
+    "address":"1111 Harney St, Omaha, NE",
+    "lat":41.25652,
+    "lng":-95.930683
+  },
+  {
+    "name":"Domino's Pizza: Myrtle Beach",
+    "address":"1706 S Kings Hwy # A, Myrtle Beach, SC",
+    "lat":33.67488,
+    "lng":-78.905143
+  },
+  {
+    "name":"Mama's Pizza",
+    "address":"715 N Saddle Creek Rd, Omaha, NE",
+    "lat":41.265883,
+    "lng":-95.980682
+  },
+  {
+    "name": "2nd Street Bistro",
+    "address": "123 North 2nd Street, Livingston, MT",
+    "lat": 45.661014,
+    "lng": -110.561422
+  },
+  {
+    "name":"Boston's Restaurant & Sports",
+    "address":"620 E Disk Dr, Rapid City, SD",
+    "lat":44.106938,
+    "lng":-103.205226
+  },
+  {
+    "name":"Ligori's Pizza & Pasta",
+    "address":"4421 Harrison Blvd, Ogden, UT",
+    "lat":41.182732,
+    "lng":-111.949199
+  }
+]

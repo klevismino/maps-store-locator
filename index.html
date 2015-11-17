@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Store Locator</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="mainScript.js"></script>
+  </head>
+  <body>
+    <div id="content-pane">
+      <div id="inputs">
+        Your location: <input id="user_location" type="text" size="30" onkeyup="showHideDistance(this.id);"/>
+        <p>
+          Number of stores to display:
+          <input id="number_of_stores" type="number" size="3" min="1" max="25" value="25" onchange="adjustValue(this.id);"/>
+          <button id="display_hide_markers_button" type="button" onclick="showHideMarkers(this.id);">Show stores</button>
+        </p>
+          <p><button id="calculate_distances" type="button" onclick="displayDistances();">Calculate distances</button></p>
+      </div>
+      <div id="outputDiv"></div>
+    </div>
+    <div id="map-canvas" style="width:750px; height:550px;"></div>
+  </body>
+</html>      	
