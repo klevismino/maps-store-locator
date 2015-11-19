@@ -120,10 +120,12 @@ function showHideMarkers(buttonId) {
                     updateAllStores(response);
                     // recreate markers for the sorted stores
                     updateAllMarkers();
+                    setMapBounds(markers.slice(0, numberOfStores));
                     showMarkers(markers.slice(0, numberOfStores));
                 }
             });
         } else {
+            setMapBounds(markers.slice(0, numberOfStores));
             showMarkers(markers.slice(0, numberOfStores));
         }
         if(document.getElementById('user_location').value) {
@@ -144,6 +146,15 @@ function showMarkers(mapMarkers) {
         mapMarkers.forEach(function(marker) {
             marker.setMap(map);
         });
+    }
+}
+function setMapBounds(mapMarkers) {
+    if(mapMarkers) {
+        var bounds = new google.maps.LatLngBounds();
+        mapMarkers.forEach(function(marker) {
+            bounds.extend(marker.getPosition());
+        });
+        map.fitBounds(bounds);
     }
 }
 
@@ -167,6 +178,7 @@ function adjustValue(inputId) {
     if(display_hide_markers_button.innerHTML === 'Hide stores') {
         clearMarkers();
         clearDirections();
+        setMapBounds(markers.slice(0, number.value));
         showMarkers(markers.slice(0, number.value));
         distance_panel.innerHTML = '';
     }
@@ -232,6 +244,7 @@ function displayDistances() {
     }
     // update markers
     clearMarkers();
+    setMapBounds(markers.slice(0, numberOfStores));
     showMarkers(markers.slice(0, numberOfStores));
 }
 
